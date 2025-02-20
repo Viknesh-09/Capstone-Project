@@ -1,0 +1,21 @@
+ Steps to Deploying a Flask Application on Azure
+
+1.Install Azure CLI: First, download and install the Azure CLI tool. Once installed, authenticate your Azure account using az login.
+
+2.Create a Resource Group: Set up a dedicated resource group to manage your app’s resources with az group create --name flaskapp-rg --location eastus.
+
+3.Set Up an App Service Plan: Establish a hosting plan for your application with az appservice plan create --name flaskapp-plan --resource-group flaskapp-rg --sku F1.
+
+4.Deploy the Web Application: Create a new web app in Azure using az webapp create --name flaskapp-api --resource-group flaskapp-rg --plan flaskapp-plan --runtime "PYTHON:3.9".
+
+5.Prepare Your Application: Ensure your project contains the required dependencies in requirements.txt and an entry file (run.py or app.py) that initializes the Flask application using app = Flask(__name__).
+
+6.Package the Application: Archive your project files into a .zip file (excluding the virtual environment) using zip -r flaskapp.zip ..
+
+7.Deploy the Application to Azure: Upload and deploy your application using az webapp deploy --resource-group flaskapp-rg --name flaskapp-api --src-path flaskapp.zip.
+
+8.Configure Environment Variables (Optional): Set any necessary environment variables with az webapp config appsettings set --name flaskapp-api --resource-group flaskapp-rg --settings KEY=VALUE.
+
+9.Verify Deployment: Access your application at https://flaskapp-api.azurewebsites.net, replacing flaskapp-api with your actual app name.
+
+10.Debugging and Logs: If issues arise, check real-time logs using az webapp log tail --resource-group flaskapp-rg --name flaskapp-api to diagnose and resolve errors.
