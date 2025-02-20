@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask CRUD App</title>
+    <script>
+        async function fetchUsers() {
+            const response = await fetch("/users");
+            const users = await response.json();
+            let output = "<ul>";
+            users.forEach(user => {
+                output += `<li>${user.name} (${user.email})</li>`;
+            });
+            output += "</ul>";
+            document.getElementById("userList").innerHTML = output;
+        }
+    </script>
+</head>
+<body>
+    <h1>User Management</h1>
+    <button onclick="fetchUsers()">Get Users</button>
+    <div id="userList"></div>
+</body>
+</html>

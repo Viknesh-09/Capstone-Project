@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/your-repo.git'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh 'pytest'
+            }
+        }
+        stage('Deploy to Azure') {
+            steps {
+                sh 'az webapp up --name flask-crud-app --resource-group myResourceGroup'
+            }
+        }
+    }
+}
